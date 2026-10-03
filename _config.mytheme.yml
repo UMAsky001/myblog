@@ -31,12 +31,10 @@ profile:
   # 昵称
   name: Hitimes
 
-  # 个人简介，可以写多行（每行前面加 - ）
+  # 个人简介。数组的每一项渲染成一行
   bio:
-    - The brain is wider than the sky.
-    - For, put them side by side,
-    - the one the other will contain.
-    - With ease, and you beside.
+    - 一个人不是在该死的时候死，而是在能死的时候死。
+    - ——奥雷里亚诺·布恩迪亚上校
 
   # ---------- 社交按钮 ----------
   # 只用 github 和 bilibili 两个位置，写用户名或完整链接都行
