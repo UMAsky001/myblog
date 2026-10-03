@@ -1,0 +1,18 @@
+<%
+/**
+ * 分页控件。只有页数大于 1 时才渲染。
+ */
+if (page.total > 1) {
+  var prevText = '\u00ab ' + __('prev');
+  var nextText = __('next') + ' \u00bb';
+%>
+<nav class="pagination" aria-label="Pagination">
+  <%- paginator({
+    prev_text: prevText,
+    next_text: nextText,
+    mid_size: 1,
+    end_size: 1,
+    escape: false
+  }) %>
+</nav>
+<% } %>

@@ -1,0 +1,46 @@
+<%
+/**
+ * 页面 <title> 的统一拼接逻辑
+ */
+var pageTitle = page.title;
+
+if (is_archive()) {
+  pageTitle = __('archives');
+  if (is_month()) {
+    pageTitle += ': ' + page.year + '/' + page.month;
+  } else if (is_year()) {
+    pageTitle += ': ' + page.year;
+  }
+} else if (is_category()) {
+  pageTitle = __('categories') + ': ' + page.category;
+} else if (is_tag()) {
+  pageTitle = __('tags') + ': ' + page.tag;
+} else if (is_home() && !pageTitle) {
+  pageTitle = '';
+}
+%>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><% if (pageTitle) { %><%= pageTitle %> | <% } %><%= config.title %></title>
+
+  <% if (config.description) { %>
+  <meta name="description" content="<%= config.description %>">
+  <% } %>
+  <% if (config.keywords && config.keywords.length) { %>
+  <meta name="keywords" content="<%= config.keywords %>">
+  <% } %>
+
+  <% if (theme.favicon) { %>
+  <%- favicon_tag(theme.favicon) %>
+  <% } %>
+
+  <% if (is_post()) { %>
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="<%= page.title %>">
+  <meta property="og:url" content="<%= url_for(page.path) %>">
+  <% if (config.url) { %>
+  <meta property="og:site_name" content="<%= config.title %>">
+  <% } %>
+  <% } %>
+
+  <%- css('css/style') %>

@@ -1,0 +1,38 @@
+<%
+/**
+ * 首页 / 归档列表里的一篇文章卡片
+ * 用法：partial('_partial/card', { post: post })
+ */
+var post = post || page;
+var dateText = mytheme_date(post.date);
+var cover = post.thumbnail || post.cover || '';
+var summary = mytheme_excerpt(post, theme.excerpt_length);
+var hasReadMore = !!theme.read_more;
+%>
+<article class="entry aero-panel<%= hasReadMore ? ' has-read-more' : '' %>">
+  <header class="entry-head">
+    <h2 class="entry-title">
+      <a href="<%= url_for(post.path) %>"><%= post.title %></a>
+    </h2>
+    <time class="entry-date" datetime="<%= post.date.toISOString() %>"><%= dateText %></time>
+  </header>
+
+  <% if (cover || summary) { %>
+  <%# 内层小窗口：比外层面板更透，做出"窗中窗"的层次 %>
+  <div class="entry-body panel-inset">
+    <% if (cover) { %>
+    <a class="entry-thumb" href="<%= url_for(post.path) %>">
+      <img src="<%= url_for(cover) %>" alt="<%= post.title %>">
+    </a>
+    <% } %>
+    <% if (summary) { %>
+    <p class="entry-excerpt"><%= summary %></p>
+    <% } %>
+  </div>
+  <% } %>
+
+  <% if (theme.read_more) { %>
+  <%# 右下角凸出的小按钮，仿照头像的做法 %>
+  <a class="read-more" href="<%= url_for(post.path) %>"><%= theme.read_more %></a>
+  <% } %>
+</article>

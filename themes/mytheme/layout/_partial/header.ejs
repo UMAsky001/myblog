@@ -1,0 +1,36 @@
+<%
+/**
+ * 导航栏：Aero 玻璃质感工具条
+ *
+ * 站点标题按需求不在导航栏显示了（浏览器标签页的标题不受影响）。
+ * 时间由 js/main.js 每秒更新，同时它本身就是回首页的链接，
+ * 这样左上角依然有回首页的入口。
+ */
+var menuItems = theme.menu || { Home: '/', Archives: '/archives' };
+var slogan = theme.slogan || config.subtitle;
+var homeUrl = url_for('/');
+var showClock = theme.clock !== false;
+%>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <% if (showClock) { %>
+      <a class="brand-clock" id="site-clock" href="<%= homeUrl %>"
+         title="<%= config.title %>" aria-label="Current time">--:--:--</a>
+      <% } else { %>
+      <a class="brand-title" href="<%= homeUrl %>"><%= config.title %></a>
+      <% } %>
+    </div>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <% Object.keys(menuItems).forEach(function (name) { %>
+      <a class="nav-link" href="<%= url_for(menuItems[name]) %>"><%= name %></a>
+      <% }); %>
+    </nav>
+
+    <% if (slogan) { %>
+    <p class="header-slogan"><%= slogan %></p>
+    <% } %>
+  </div>
+</header>

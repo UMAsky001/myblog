@@ -1,0 +1,138 @@
+// ============================================================
+// 左侧个人卡片 + 两栏布局
+// ============================================================
+
+// 文章栏与个人卡片的横向布局
+.layout
+  display: block
+
+  &.has-profile
+    display: grid
+    grid-template-columns: $profile-width 1fr
+    gap: $gap
+    align-items: start
+
+.main-column
+  min-width: 0        // 防止长代码块把栅格撑破
+
+// ---------- 个人卡片 ----------
+.profile-card
+  position: sticky      // 滚动时卡片跟着停在视口顶部
+  top: 74px
+  // 上边距留出足够空间，否则头像凸出去的部分会被顶栏压住
+  margin-top: 32px
+  // 上内距：只要不跟头像重叠即可，不用留满头像高度，否则标题会被压得太靠下
+  padding: 26px 14px 14px
+  // 左对齐：头像在左上角，名字在它右边，简介顺着头像下沿排，比居中更整齐
+  text-align: left
+  // 底色跟所有玻璃面板统一（由 $glass-alpha 控制）
+  background: $profile-bg
+
+// 头像：绝对定位到左上角并向外凸出，做出复古"贴纸"效果
+.profile-avatar
+  position: absolute
+  // 注意：负号紧贴变量时必须加括号，否则 Stylus 会原样输出 "-$avatar-protrude"
+  top: -($avatar-protrude)
+  // 往左凸出不能越过左侧栏边界
+  left: -6px
+  width: $avatar-size
+  height: $avatar-size
+  border-radius: 50%
+  overflow: hidden
+  border: 2px solid rgba(255, 255, 255, 0.92)
+  // 凸出的部分要有投影，才像浮在卡片上方
+  box-shadow: 0 3px 8px rgba(20, 45, 70, 0.4), inset 0 0 0 1px rgba(120, 170, 215, 0.35)
+  background: #fff
+
+  img
+    display: block
+    width: 100%
+    height: 100%
+    object-fit: cover
+
+.profile-name
+  display: flex
+  align-items: center
+  // 左边避让凸出的头像（头像宽 76px，减去左凸 6px，再留 8px 间距）
+  margin: 0 0 10px 58px
+  // 高度撑到 44px，让名字垂直中心大致落在头像的视觉中线上
+  min-height: 44px
+  font-size: 1.05em
+  font-weight: $font-weight-bold
+  color: $profile-text
+  text-shadow: $profile-text-shadow
+
+// ---------- 社交按钮（Aero 圆按钮）----------
+.profile-social
+  display: flex
+  justify-content: flex-start
+  gap: 10px
+  margin-bottom: 10px
+
+.social-btn
+  display: inline-flex
+  align-items: center
+  justify-content: center
+  width: 38px
+  height: 38px
+  border: 1px solid $glass-edge
+  border-radius: 50%
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(222, 238, 252, 0.8) 100%)
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 1px 2px rgba(50, 95, 135, 0.18)
+  color: $c-accent-deep
+
+  &:hover
+    border-color: $c-accent
+    background: linear-gradient(180deg, #ffffff 0%, rgba(190, 222, 249, 0.95) 100%)
+    color: $c-accent
+    text-decoration: none
+
+// 字母版社交按钮：G = 黑，B = 粉
+.social-github
+  color: #000000
+
+  &:hover
+    color: #333333
+
+.social-bilibili
+  color: #fb7299      // B站品牌粉
+
+  &:hover
+    color: #e85d86
+
+.social-letter
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif
+  font-size: 1.05em
+  font-weight: 700
+  // 必须是 0：line-height:1 时字形盒上下不对称，flex 居中后字母会偏上偏左
+  line-height: 0
+
+// ---------- 简介 ----------
+.profile-bio
+  margin: 0
+  color: $profile-text-soft
+  font-size: 0.86em
+  line-height: 1.65
+  font-style: italic
+  text-shadow: $profile-text-shadow
+
+// ---------- 窄屏：卡片横排到正文上方 ----------
+@media (max-width: 760px)
+  .layout.has-profile
+    grid-template-columns: 1fr
+
+  .profile-card
+    position: static
+    top: auto
+    margin-top: 28px
+    text-align: center
+
+  .profile-social
+    justify-content: center
+
+  .profile-name
+    // 占满宽度，居中显示即可，不必避让头像
+    display: block
+    margin: 0 0 8px
+    min-height: 0
+    text-align: center

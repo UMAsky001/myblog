@@ -1,0 +1,22 @@
+<%
+var type = is_category() ? 'category' : 'tag';
+var name = is_category() ? page.category : page.tag;
+%>
+<div class="archive-page">
+  <h1 class="page-title aero-panel">
+    <span class="page-title-kind"><%= type === 'category' ? __('categorized') : __('tagged') %></span>
+    <span class="page-title-name"><%= name %></span>
+  </h1>
+
+  <% if (!page.posts || !page.posts.length) { %>
+  <p class="empty-tip"><%= __('no_posts') %></p>
+  <% } else { %>
+  <div class="archive-list aero-panel">
+    <ul class="archive-items">
+      <% page.posts.each(function (post) { %>
+      <%- partial('_partial/archive-item', { post: post }) %>
+      <% }); %>
+    </ul>
+  </div>
+  <% } %>
+</div>

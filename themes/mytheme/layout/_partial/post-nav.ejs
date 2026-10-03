@@ -1,0 +1,18 @@
+<%
+var items = mytheme_menu(theme.menu);
+%>
+<div class="post-nav">
+  <% if (page.prev) { %>
+  <a class="post-nav-link post-nav-prev" href="<%= url_for(page.prev.path) %>">
+    <span class="post-nav-label">&laquo; <%= __('prev') %></span>
+    <span class="post-nav-title"><%= page.prev.title %></span>
+  </a>
+  <% } %>
+
+  <% if (page.next) { %>
+  <a class="post-nav-link post-nav-next" href="<%= url_for(page.next.path) %>">
+    <span class="post-nav-label"><%= __('next') %> &raquo;</span>
+    <span class="post-nav-title"><%= page.next.title %></span>
+  </a>
+  <% } %>
+</div>

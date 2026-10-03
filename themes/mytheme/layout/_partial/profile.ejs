@@ -1,0 +1,55 @@
+<%
+/**
+ * 左侧个人卡片：头像 + 昵称 + 简介 + 社交按钮
+ * 显示与否由 _config.yml 的 profile.enable 控制
+ */
+var profile = theme.profile || {};
+var name = profile.name || config.author || config.title;
+var bio = profile.bio || [];
+if (typeof bio === 'string') { bio = [bio]; }
+var social = profile.social || {};
+
+// 写用户名或完整链接都行，这里统一拼成完整地址
+var socialLinks = [];
+if (social.github) {
+  var gh = String(social.github);
+  socialLinks.push({
+    key: 'github',
+    label: __('my_github'),
+    url: /^https?:\/\//.test(gh) ? gh : 'https://github.com/' + gh
+  });
+}
+if (social.bilibili) {
+  var bl = String(social.bilibili);
+  socialLinks.push({
+    key: 'bilibili',
+    label: __('my_bilibili'),
+    url: /^https?:\/\//.test(bl) ? bl : 'https://space.bilibili.com/' + bl
+  });
+}
+%>
+<aside class="profile-card aero-panel">
+  <div class="profile-avatar">
+    <img src="<%= url_for(profile.avatar) %>" alt="<%= name %>">
+  </div>
+
+  <h2 class="profile-name"><%= name %></h2>
+
+  <% if (socialLinks.length) { %>
+  <div class="profile-social">
+    <% socialLinks.forEach(function (link) { %>
+    <a class="social-btn social-<%= link.key %>" href="<%= link.url %>"
+       target="_blank" rel="noopener" title="<%= link.label %>" aria-label="<%= link.label %>">
+      <%# 用首字母代替图标：GitHub 黑 G、B站 粉 B %>
+      <span class="social-letter" aria-hidden="true"><%= link.key === 'github' ? 'G' : 'B' %></span>
+    </a>
+    <% }); %>
+  </div>
+  <% } %>
+
+  <% if (bio.length) { %>
+  <p class="profile-bio">
+    <% bio.forEach(function (line) { %><%= line %><br><% }); %>
+  </p>
+  <% } %>
+</aside>

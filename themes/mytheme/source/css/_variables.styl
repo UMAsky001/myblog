@@ -1,0 +1,140 @@
+// ============================================================
+// mytheme - Aero (Vista/7) 淡蓝玻璃风
+// 改配色只动这个文件就行
+// ============================================================
+
+// 主色
+$c-accent        = #3a8fd8
+$c-accent-deep   = #1f6fb2
+$c-accent-light  = #d9e9f8
+
+// 文字
+$c-text          = #01090f
+$c-text-soft     = #010508
+$c-text-mute     = #12324d
+
+// 页面背景（水感淡蓝）
+$c-page-1        = #dceaf8
+$c-page-2        = #c6dcf2
+$c-page-3        = #eaf4fd
+
+// ============================================================
+// 玻璃面板透明度（统一控制）
+// ============================================================
+// 只改这一个值，所有玻璃面板一起变：
+// 面板 / 卡片 / 顶栏 / 页脚 / 代码块 / 表格 / 空状态提示
+//   0.6  = 当前值
+//   0.25 = 更透（背景图更明显，但文字更难读）
+//   0.7  = 更实（文字更清楚，玻璃感变弱）
+$glass-alpha     = 0.6
+
+$glass-tint      = rgba(255, 255, 255, $glass-alpha)
+// 保留旧变量名，指向同一个值，避免遗漏
+$glass-bg        = $glass-tint
+$glass-bg-soft   = $glass-tint
+
+// 内层小窗口（正文摘要那块）：比外层面板更「不透」，用来凸显正文
+// 必须比 $glass-alpha 大，否则看不出层次
+$glass-alpha-inset = 0.8
+$glass-tint-inset  = rgba(255, 255, 255, $glass-alpha-inset)
+
+$glass-border    = rgba(255, 255, 255, 0.55)
+$glass-edge      = rgba(120, 170, 215, 0.35)
+$glass-shadow    = 0 1px 2px rgba(50, 95, 135, 0.16), 0 6px 18px rgba(50, 95, 135, 0.10)
+$glass-blur      = blur(6px) saturate(150%)
+
+
+// ---------- 面板边框（黑色）----------
+// 最后一个数是透明度：1 = 纯黑，0.55 = 柔和深黑，0.35 = 淡黑灰
+$panel-border       = rgba(0, 0, 0, 0.55)
+$panel-border-width = 1px
+// 面板顶部内高光。黑色边框下这个值太亮会显脏，压暗一点
+$panel-inner-glow   = rgba(255, 255, 255, 0.7)
+// 面板投影，跟着黑边框一起压深
+$panel-shadow       = 0 1px 2px rgba(20, 45, 70, 0.20), 0 6px 18px rgba(20, 45, 70, 0.12)
+
+
+// 布局
+$radius          = 6px        // 圆角：一点点就好
+$radius-sm       = 4px
+// 内容总宽。加了左侧卡片后调宽到 1100，正文阅读宽度仍保持约 840px
+$container-w     = 1100px
+$gap             = 18px
+// 左侧个人卡片宽度（适当收窄，让自我介绍窗口更紧凑）
+$profile-width   = 220px
+// 头像尺寸，以及向上/向右凸出卡片的距离
+$avatar-size     = 76px
+$avatar-protrude = 22px
+
+// ---------- 个人卡片文字 ----------
+// 深色字 + 与其它面板统一的 0.4 底色
+$profile-text        = rgba(14, 44, 74, 0.96)
+$profile-text-soft   = rgba(24, 58, 92, 0.9)
+// 文字投影（个人卡片压在背景图上，用稍强的白晕保证透亮）
+$profile-text-shadow = $text-glow-strong
+// 个人卡片底色，跟所有玻璃面板统一
+$profile-bg          = $glass-tint
+
+// 字体
+$font-sans       = "Segoe UI", "Segoe UI Emoji", Tahoma, "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", Arial, sans-serif
+$font-mono       = Consolas, "Cascadia Mono", "Courier New", "Microsoft YaHei", monospace
+
+$line-height     = 1.75
+
+// ============================================================
+// 字重（决定"整体加粗"的程度）
+// ============================================================
+// 只改这几个值就能整体调粗细。可用的值：300 / 400 / 500 / 600 / 700
+//   500 = 中等偏粗（当前，整体明显加粗但标题仍可辨认）
+//   400 = 正常
+//   600 = 很粗（正文字会显得笨重）
+$font-weight-normal = 500
+$font-weight-bold   = 600
+$font-weight-title  = 700
+
+
+// ============================================================
+// 文字边缘的白色光晕（超级轻微）
+// ============================================================
+// 第 4 个 0.3 是不透明度，就是"轻微"的程度：
+//   0.15 = 几乎看不见
+//   0.3  = 当前，要仔细看才察觉，但文字边缘会显得透亮
+//   0.6  = 明显发光
+$text-glow        = 0 0 3px rgba(255, 255, 255, 0.3)
+// 压在背景图上的深色文字，用稍强一点的光晕保证透亮
+$text-glow-strong = 0 0 4px rgba(255, 255, 255, 0.45)
+// 代码块里的等宽字不加光晕，避免字符挤在一起发糊
+$text-glow-none   = none
+
+
+
+// ============================================================
+// 页面背景
+// ============================================================
+// 想换背景图：把新图命名成 bg.jpg 丢进 source\images\ 覆盖即可
+//
+// ⚠️ 这里必须写带根路径前缀的绝对路径，不能写成 images/bg.jpg
+//    实测：写相对路径时浏览器会解析成 /myblog/css/images/bg.jpg，导致 404、背景变成纯色。
+//    所以你如果改了 Hexo 的 root 配置（比如换仓库名），这个路径也要跟着改。
+//    当前 root: /myblog/  →  路径写成 /myblog/images/bg.jpg
+$bg-image        = url('/myblog/images/bg.jpg')
+
+// 关键：100% 100% = 强行拉伸铺满（不裁切、会变形）
+//       想保持比例就改成 cover（会裁掉两边）——但 cover 对固定定位背景更稳，不会出现底部露底
+$bg-size         = cover
+
+// 图片在视口里的对齐位置，center = 居中
+$bg-position     = center center
+$bg-repeat       = no-repeat
+// fixed = 滚动时背景不动（视差感）；scroll = 跟着页面滚
+$bg-attachment   = fixed
+
+// 图片加载慢或加载失败时先铺的底色
+$bg-fallback-color = $c-page-2
+
+// 背景上盖一层白纱，数值越大背景越淡、面板文字越好读
+// 0 = 不要白纱，0.35 = 淡淡的，0.6 = 明显发白
+$bg-veil             = 0
+$bg-veil-color       = rgba(255, 255, 255, $bg-veil)
+// 用渐变来铺白纱（纯色当图层会直接盖住图片，所以必须写成渐变）
+$bg-veil-layer       = linear-gradient($bg-veil-color, $bg-veil-color)

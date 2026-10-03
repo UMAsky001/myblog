@@ -1,0 +1,212 @@
+// ============================================================
+// 全局重置与基础排版
+// ============================================================
+
+*
+  box-sizing: border-box
+
+html
+  // 关键：这里不能用 height: 100%。否则 html 盒子被锁成视口高度，
+  // 而 background-size: 100% 100% 是相对「元素盒子」算的，
+  // 背景图只画到盒子底部就被裁掉，body 比视口高时下面会露出兜底色。
+  // 实测：height:100% 时 html 盒高 526px，而 body 有 602px，底部 76px 露底。
+  min-height: 100%
+  background-color: $bg-fallback-color
+  background-image: $bg-veil-layer, $bg-image
+  background-size: $bg-size
+  background-position: $bg-position
+  background-repeat: $bg-repeat
+  background-attachment: $bg-attachment
+
+body
+  margin: 0
+  // 100vh 兜底：内容比视口矮时 body 也铺满视口
+  min-height: 100vh
+  font-family: $font-sans
+  font-size: 15px
+  line-height: $line-height
+  color: $c-text
+  -webkit-font-smoothing: antialiased
+
+a
+  color: $c-accent-deep
+  text-decoration: none
+
+  &:hover
+    color: $c-accent
+    text-decoration: underline
+
+img
+  max-width: 100%
+  height: auto
+  border: 0
+
+h1, h2, h3, h4, h5, h6
+  margin: 1.4em 0 0.6em
+  line-height: 1.35
+  font-weight: $font-weight-title
+  color: $c-text
+  text-shadow: $text-glow
+
+// ---------- 字重与白色光晕 ----------
+// 正文整体加粗（参数在 _variables.styl）
+body
+  font-weight: $font-weight-normal
+  // 压在半透明面板上的文字用稍强的光晕，保证边缘透亮
+  text-shadow: $text-glow-strong
+
+// 面板内部的正文用更轻微的光晕
+.entry, .post, .page, .archive-page, .profile-card
+  text-shadow: $text-glow
+
+// 等宽字不加光晕，否则字符边缘会糊在一起
+code, kbd, pre, samp
+  text-shadow: $text-glow-none
+
+// 表单控件上的光晕会让 Aero 玻璃质感变脏，去掉
+button, input, select, textarea
+  text-shadow: $text-glow-none
+
+h1
+  font-size: 1.6em
+
+h2
+  font-size: 1.35em
+
+h3
+  font-size: 1.15em
+
+p
+  margin: 0 0 1em
+
+hr
+  border: 0
+  border-top: 1px solid $glass-edge
+  margin: 1.6em 0
+
+blockquote
+  margin: 1em 0
+  padding: 10px 16px
+  border-left: 3px solid $c-accent
+  background: $glass-tint
+  color: $c-text-soft
+
+  p:last-child
+    margin-bottom: 0
+
+code, kbd, pre, samp
+  font-family: $font-mono
+  font-size: 0.92em
+
+:not(pre) > code
+  padding: 1px 5px
+  border: 1px solid $glass-edge
+  border-radius: $radius-sm
+  background: $glass-tint
+  color: $c-accent-deep
+
+pre
+  margin: 1.1em 0
+  padding: 12px 14px
+  overflow: auto
+  border: 1px solid $glass-edge
+  border-radius: $radius
+  background: $glass-tint
+  line-height: 1.6
+
+  code
+    padding: 0
+    border: 0
+    background: none
+    color: inherit
+
+// highlight.js 的行号列：压紧，避免撑成大格子
+figure.highlight,
+.highlight
+  table
+    width: auto
+    margin: 0
+    border: 0
+
+  td
+    padding: 0
+    border: 0
+
+  .gutter
+    width: 2.2em
+    padding-right: 10px
+    border-right: 1px solid $glass-edge
+    color: $c-text-mute
+    text-align: right
+    user-select: none
+
+  .code
+    padding-left: 12px
+
+table
+  width: 100%
+  margin: 1.2em 0
+  border-collapse: collapse
+  font-size: 0.95em
+
+  th, td
+    padding: 7px 10px
+    border: 1px solid $glass-edge
+    text-align: left
+
+  th
+    background: $glass-tint
+    font-weight: $font-weight-title
+
+  tr:nth-child(even) td
+    background: rgba(255, 255, 255, 0.35)
+
+figure
+  margin: 1.2em 0
+
+figcaption
+  font-size: 0.85em
+  color: $c-text-mute
+  text-align: center
+
+// ---------- 玻璃面板 ----------
+.aero-panel
+  border: $panel-border-width solid $panel-border
+  border-radius: $radius
+  background: $glass-bg
+  box-shadow: $panel-shadow, inset 0 1px 0 $panel-inner-glow
+  backdrop-filter: $glass-blur
+  -webkit-backdrop-filter: $glass-blur
+
+// ---------- 布局容器 ----------
+.page
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+
+.container
+  width: 100%
+  max-width: $container-w
+  margin: 0 auto
+  padding: 0 16px
+
+#content
+  flex: 1 0 auto
+  padding-top: $gap
+  padding-bottom: 32px
+
+// ---------- 通用小元素 ----------
+.meta-label
+  color: $c-text-mute
+  font-size: 0.85em
+
+.empty-tip
+  padding: 28px
+  border: 1px dashed $glass-edge
+  border-radius: $radius
+  background: $glass-bg-soft
+  color: $c-text-soft
+  text-align: center
+
+::selection
+  background: rgba(90, 160, 220, 0.35)

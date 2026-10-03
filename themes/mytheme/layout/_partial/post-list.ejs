@@ -1,0 +1,17 @@
+<%
+/**
+ * 文章列表容器：首页和归档页共用
+ */
+var posts = page.posts;
+%>
+<div class="entry-list">
+  <% if (!posts || !posts.length) { %>
+  <p class="empty-tip"><%= __('no_posts') %></p>
+  <% } else { %>
+    <% posts.each(function (post) { %>
+      <%- partial('_partial/card', { post: post }) %>
+    <% }); %>
+  <% } %>
+</div>
+
+<%- partial('_partial/paginator') %>

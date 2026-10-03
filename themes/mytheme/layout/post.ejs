@@ -1,0 +1,41 @@
+<%
+/**
+ * 单篇文章
+ */
+var dateText = mytheme_date(page.date);
+var tags = page.tags;
+var categories = page.categories;
+%>
+<article class="post">
+  <header class="post-header aero-panel">
+    <h1 class="post-title"><%= page.title %></h1>
+    <div class="post-meta">
+      <time class="post-date" datetime="<%= page.date.toISOString() %>">
+        <span class="meta-label"><%= __('posted_on') %></span> <%= dateText %>
+      </time>
+      <% if (categories && categories.length) { %>
+      <span class="post-categories">
+        <% categories.each(function (cat, i) { %><% if (i) { %>, <% } %><a href="<%= url_for(cat.path) %>"><%= cat.name %></a><% }); %>
+      </span>
+      <% } %>
+    </div>
+  </header>
+
+  <%# 正文用内层小窗口，和列表页的摘要保持同一层次感 %>
+  <div class="post-content aero-panel panel-inset">
+    <%- page.content %>
+  </div>
+
+  <% if (tags && tags.length) { %>
+  <footer class="post-footer aero-panel">
+    <span class="meta-label"><%= __('tagged') %></span>
+    <span class="post-tags">
+      <% tags.each(function (tag) { %>
+      <a class="tag-chip" href="<%= url_for(tag.path) %>"><%= tag.name %></a>
+      <% }); %>
+    </span>
+  </footer>
+  <% } %>
+
+  <%- partial('_partial/post-nav') %>
+</article>

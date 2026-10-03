@@ -1,0 +1,15 @@
+.DS_Store
+Thumbs.db
+db.json
+*.log
+node_modules/
+public/
+.deploy*/
+_multiconfig.yml
+
+# --- 启用 GitHub Actions 自动部署后补充 ---
+# hexo-deployer-git 的临时目录（如果以后又用 hexo deploy）
+.deploy_git/
+# 编辑器配置
+.vscode/
+.idea/

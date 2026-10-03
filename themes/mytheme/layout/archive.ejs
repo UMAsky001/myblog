@@ -1,0 +1,23 @@
+<%
+var year = null;
+%>
+<div class="archive-page">
+  <h1 class="page-title aero-panel"><%= __('archives') %></h1>
+
+  <% if (!page.posts || !page.posts.length) { %>
+  <p class="empty-tip"><%= __('no_posts') %></p>
+  <% } else { %>
+  <div class="archive-list aero-panel">
+    <% page.posts.each(function (post) { %>
+      <% var postYear = post.date.year(); %>
+      <% if (postYear !== year) { %>
+        <% year = postYear; %>
+        <h2 class="archive-year"><%= year %></h2>
+        <ul class="archive-items">
+      <% } %>
+      <%- partial('_partial/archive-item', { post: post }) %>
+    <% }); %>
+      </ul>
+  </div>
+  <% } %>
+</div>

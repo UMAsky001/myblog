@@ -1,0 +1,64 @@
+name: Deploy Hexo to GitHub Pages
+
+# 触发条件：push 到 main 分支；也可以在 Actions 页面手动点 Run workflow
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# GitHub Pages 部署所需的最小权限
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同一时间只跑一个部署，避免并发推送时互相覆盖
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          # 与本机 v26.7.0 保持同一主版本
+          node-version: '26'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build site
+        run: npm run build
+
+      - name: Prepare artifact
+        run: |
+          # 阻止 GitHub Pages 用 Jekyll 处理产物（避免忽略下划线开头的目录）
+          touch public/.nojekyll
+          echo "--- 构建产物顶层内容 ---"
+          ls -la public
+          echo "--- 主题资源抽查 ---"
+          ls -la public/images public/css
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Hexo 的输出目录（_config.yml 里 public_dir 的默认值）
+          path: ./public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

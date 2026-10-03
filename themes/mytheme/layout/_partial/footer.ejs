@@ -1,0 +1,14 @@
+<%
+var year = new Date().getFullYear();
+var owner = config.author || config.title;
+%>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <% if (theme.copyright) { %>
+    <p class="footer-copyright"><%- theme.copyright %></p>
+    <% } else { %>
+    <p class="footer-copyright">&copy; <%= year %> <%= owner %></p>
+    <% } %>
+    <p class="footer-meta">Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &middot; Theme <strong>mytheme</strong></p>
+  </div>
+</footer>

@@ -1,0 +1,32 @@
+// ============================================================
+// 分页
+// ============================================================
+
+.pagination
+  margin-top: $gap
+  text-align: center
+
+  a,
+  span
+    display: inline-block
+    min-width: 30px
+    margin: 0 2px
+    padding: 3px 9px
+    border: 1px solid $glass-edge
+    border-radius: $radius
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(225, 240, 253, 0.7) 100%)
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95)
+    color: $c-text-soft
+    font-size: 0.88em
+
+  a:hover
+    border-color: $c-accent
+    background: linear-gradient(180deg, #ffffff 0%, rgba(198, 226, 250, 0.9) 100%)
+    color: $c-accent-deep
+    text-decoration: none
+
+  .current
+    border-color: $c-accent
+    background: linear-gradient(180deg, #eaf5ff 0%, rgba(160, 205, 245, 0.9) 100%)
+    color: $c-accent-deep
+    font-weight: $font-weight-bold

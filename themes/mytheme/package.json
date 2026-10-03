@@ -1,0 +1,13 @@
+{
+  "name": "hexo-theme-mytheme",
+  "version": "0.1.0",
+  "description": "An Aero (Windows Vista/7) inspired light-blue glass theme for Hexo",
+  "keywords": [
+    "hexo",
+    "theme",
+    "mytheme",
+    "aero",
+    "glass"
+  ],
+  "license": "MIT"
+}

@@ -1,0 +1,49 @@
+# ============================================================
+# mytheme - Aero 风格 Hexo 主题配置
+# 这里的值都可以在博客根目录的 _config.mytheme.yml 中覆盖
+# ============================================================
+
+# ---------- Header / 导航 ----------
+# 显示的菜单项。key 同时用于取多语言文案，可用的 key：
+# Home / Archives / Categories / Tags / About
+# 也可以用 "我的小站: /" 这种原样写死的写法
+menu:
+  Home: /
+  Archives: /archives
+  About: /about
+
+# 站点标语，显示在导航栏右侧（留空则不显示）
+slogan: live happily.
+
+# ---------- 首页文章列表 ----------
+# 首页每篇显示的最大字符数，设为 0 则显示全文
+excerpt_length: 160
+# "Read More..." 链接文案，设为空字符串则隐藏
+read_more: Read More...
+
+# ---------- 左侧个人卡片 ----------
+profile:
+  # 关掉后文章栏恢复居中
+  enable: true
+  # 头像路径。这里写相对 source\ 的路径，模板会自动补上 root 前缀
+  # （当前 root 是 /myblog/，最终生成 /myblog/images/avatar.png）
+  # 换头像：把图片命名成 avatar.png 放进 themes\mytheme\source\images\ 覆盖即可
+  avatar: images/avatar.png
+  # 昵称
+  name: Hitimes
+  # 简介，数组形式，每项一行
+  bio: []
+  # 社交按钮：只支持 github / bilibili，写用户名或完整链接，留空则不显示
+  social:
+    github: ''
+    bilibili: ''
+
+# ---------- 页脚 ----------
+# 版权信息，支持 HTML。留空则显示 "© 年份 站点标题"
+copyright:
+
+# ---------- 预留开关（当前版本尚未实现，先留位） ----------
+# 文章目录
+toc: false
+# 暗色模式
+dark_mode: false

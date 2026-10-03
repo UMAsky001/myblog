@@ -1,0 +1,10 @@
+<%
+/**
+ * 归档页里的紧凑条目
+ */
+var dateText = mytheme_date(post.date);
+%>
+<li class="archive-item">
+  <time class="archive-date" datetime="<%= post.date.toISOString() %>"><%= dateText %></time>
+  <a class="archive-title" href="<%= url_for(post.path) %>"><%= post.title %></a>
+</li>

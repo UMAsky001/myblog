@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="<%= config.language || 'en' %>">
+<head>
+  <%- partial('_partial/head') %>
+</head>
+<%
+// 有个人卡片时，文章栏整体右移，左侧留出 sidebar 宽度
+var hasProfile = theme.profile && theme.profile.enable === true;
+%>
+<body>
+  <div class="page">
+    <%- partial('_partial/header') %>
+
+    <div class="container" id="content">
+      <div class="layout<%= hasProfile ? ' has-profile' : '' %>">
+        <% if (hasProfile) { %>
+        <%- partial('_partial/profile') %>
+        <% } %>
+
+        <main class="main-column">
+          <%- body %>
+        </main>
+      </div>
+    </div>
+
+    <%- partial('_partial/footer') %>
+  </div>
+  <%- partial('_partial/after-footer') %>
+</body>
+</html>

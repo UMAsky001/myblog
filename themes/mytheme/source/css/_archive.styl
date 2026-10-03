@@ -1,0 +1,54 @@
+// ============================================================
+// 归档 / 分类 / 标签列表
+// ============================================================
+
+.archive-list
+  padding: 14px 18px
+
+.page-title-name
+  font-weight: $font-weight-bold
+
+.archive-year
+  margin: 0 0 6px
+  padding-bottom: 5px
+  border-bottom: 1px solid rgba(120, 170, 215, 0.3)
+  color: $c-accent-deep
+  font-size: 1.05em
+
+  &:not(:first-child)
+    margin-top: 20px
+
+.archive-items
+  margin: 0
+  padding: 0
+  list-style: none
+
+.archive-item
+  display: flex
+  align-items: baseline
+  gap: 12px
+  padding: 4px 0
+  border-bottom: 1px dotted rgba(120, 170, 215, 0.28)
+
+  &:last-child
+    border-bottom: 0
+
+.archive-date
+  flex: 0 0 92px
+  color: $c-text-mute
+  font-size: 0.82em
+
+.archive-title
+  color: $c-text
+  font-size: 0.95em
+
+  &:hover
+    color: $c-accent-deep
+
+@media (max-width: 600px)
+  .archive-item
+    flex-direction: column
+    gap: 0
+
+  .archive-date
+    flex-basis: auto

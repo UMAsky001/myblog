@@ -1,0 +1,51 @@
+# ============================================================
+# mytheme 的主题配置覆盖文件
+# 这里的内容会覆盖 themes/mytheme/_config.yml 中的同名项
+# 改主题外观优先改这里，主题升级时不会丢
+# ============================================================
+
+# 导航菜单
+menu:
+  Home: /
+  Archives: /archives
+  About: /about
+
+# 导航栏右侧标语
+slogan: "人啊，幸福吧。"
+
+# 首页摘要长度（0 = 显示全文）
+excerpt_length: 160
+
+
+# ============================================================
+# 左侧个人卡片
+# ============================================================
+profile:
+  # 关掉后文章栏恢复居中
+  enable: true
+
+  # 头像：把图片命名成 avatar.png 放到 themes\mytheme\source\images\ 覆盖即可
+  # 这里写相对 source\ 的路径即可，模板会自动补上 root 前缀
+  avatar: images/avatar.png
+
+  # 昵称
+  name: Hitimes
+
+  # 个人简介，可以写多行（每行前面加 - ）
+  bio:
+    - The brain is wider than the sky.
+    - For, put them side by side,
+    - the one the other will contain.
+    - With ease, and you beside.
+
+  # ---------- 社交按钮 ----------
+  # 只用 github 和 bilibili 两个位置，写用户名或完整链接都行
+  #   用户名  : Hitimes   （github 会拼成 https://github.com/Hitimes）
+  #   完整链接: https://space.bilibili.com/123456789
+  #
+  # >>> 把下面两个引号里填上你的账号，按钮就会自动出现 <<<
+  # 留空则该按钮不显示
+  social:
+    github: 'https://github.com/UMAsky001'
+    # 完整链接，已去掉 tracking 参数（?spm_id_from=...）
+    bilibili: 'https://space.bilibili.com/384601520'
